@@ -2,7 +2,7 @@
 -- Creates DB
 CREATE DATABASE IF NOT EXISTS hbnb_dev_db;
 -- Creates user if not exists, identified with a password
-CREATE USER IF NOT EXISTS 'hbnb_dev'@'localhost' IDENTIFIED BY 'hbnb_dev_pwd'
+CREATE USER IF NOT EXISTS 'hbnb_dev'@'localhost' IDENTIFIED BY 'hbnb_dev_pwd';
 -- Grant all privileges to user on DB
 GRANT ALL PRIVILEGES ON 'hbnb_dev_dv'.* TO 'hbnb_dev'@'localhost';
 -- Grant Select privileges to user on performance_schema DB
