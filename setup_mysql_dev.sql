@@ -1,6 +1,6 @@
 -- Script that prepares a MySQL server for the project
 -- Creates DB
-CREATE DATABASE IF NOT EXISTS hbnb_dev_dv;
+CREATE DATABASE IF NOT EXISTS hbnb_dev_db;
 -- Creates user if not exists, identified with a password
 CREATE USER IF NOT EXISTS 'hbnb_dev'@'localhost' IDENTIFIED BY 'hbnb_dev_pwd'
 -- Grant all privileges to user on DB
