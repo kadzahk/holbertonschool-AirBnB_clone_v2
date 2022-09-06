@@ -39,13 +39,13 @@ class DBStorage():
         if cls in self.__classes:
             search = self.__session.query(cls)
             for obj in search:
-                key = f'{obj.__class__.name}.{obj.id}'
+                key = f'{obj.__class__.__name__}.{obj.id}'
                 result[key] = obj
         elif cls is None:
             for clas in self.__classes:
                 search = self.__session.query(clas)
                 for obj in search:
-                    key = f'{obj.__class__.name}.{obj.id}'
+                    key = f'{obj.__class__.__name__}.{obj.id}'
                     result[key] = obj
         return(result)
 
