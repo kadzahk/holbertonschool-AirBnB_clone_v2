@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
-from sqlalchemy.orm import relationship, backref
+from sqlalchemy.orm import relationship
 from sqlalchemy.sql.schema import Table
 from sqlalchemy.sql.sqltypes import Float, Integer
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey
 from models.review import Review
 import models
-from os import getenv
+
 
 place_amenity = Table(
     'place_amenity', Base.metadata,
@@ -48,14 +48,33 @@ class Place(BaseModel, Base):
         cascade="all, delete, delete-orphan"
     )
 
+    amenities = relationship(
+        'Amenity',
+        secondary=place_amenity,
+        viewonly=False
+    )
+
     @property
     def reviews(self):
         """ Getter that that returns the list of Reviews instances """
-        instances = models.storage.all(Review)
+        instances = models.storage.all('Review')
         new = []
         for review in instances.values():
             if review.place_id == (self.id):
                 new.append(review)
+        return new
+
+    @property
+    def amenities(self):
+        """
+        Getter attribute amenities that returns the list of Amenity
+        instances
+        """
+        new = []
+        instances = models.storage.all('Amenity').values()
+        for amenity in instances:
+            if amenity.amenity_ids == self.id:
+                new.append(amenity)
         return new
 
     @reviews.setter
