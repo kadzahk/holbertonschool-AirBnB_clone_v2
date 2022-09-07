@@ -3,15 +3,23 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, String, ForeignKey
+from os import getenv
 
 
-class City(BaseModel, Base):
+class City(BaseModel, Base if (getenv('HBNB_TYPE_STORAGE') == 'db') else
+           object):
+
     """ The city class, contains state ID and name """
-    __tablename__ = 'cities'
-    state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
-    name = Column(String(128), nullable=False)
-    places = relationship(
-        "Place",
-        backref='cities',
-        cascade="all, delete",
-        passive_deletes=True)
+
+    if (getenv('HBNB_TYPE_STORAGE') == 'db'):
+        __tablename__ = 'cities'
+        state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
+        name = Column(String(128), nullable=False)
+        places = relationship(
+            "Place",
+            backref='cities',
+            cascade="all, delete",
+            passive_deletes=True)
+    else:
+        state_id = ""
+        name = ""
