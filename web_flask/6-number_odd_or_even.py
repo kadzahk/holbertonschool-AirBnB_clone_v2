@@ -16,10 +16,11 @@ Routes:
         only if n is an integer:
         H1 tag: “Number: n” inside the tag BODY
 """
-from flask import Flask, render_template
-
+from flask import Flask
+from flask import render_template
 
 app = Flask(__name__)
+
 
 
 @app.route("/", strict_slashes=False)
@@ -80,14 +81,14 @@ def task_5(n):
     return render_template("5-number.html", number=n)
 
 
-@app.route("/number_odd_or_even/<int:n>", strict_slashes=False)
+@app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
 def task_6(n):
     """
     Function that return a template renderized
     and passed args and check if it's
     an odd or even number
     """
-    return render_template("6-number_odd_or_even.html", number=n)
+    return render_template('6-number_odd_or_even.html', n=n)
 
 
 if __name__ == "__main__":
