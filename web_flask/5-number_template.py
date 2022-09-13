@@ -16,8 +16,8 @@ Routes:
         only if n is an integer:
         H1 tag: “Number: n” inside the tag BODY
 """
-from flask import Flask, render_template
-
+from flask import Flask
+from flask import render_template
 
 app = Flask(__name__)
 
@@ -71,13 +71,13 @@ def task_4(n):
     return "{} is a number".format(n)
 
 
-@app.route("/number_template/<int:n>", strict_slashes=False)
+@app.route('/number_template/<int:n>', strict_slashes=False)
 def task_5(n):
     """
     Function that return a template renderized
     and passed args
     """
-    return render_template("5-number.html", number=n)
+    return render_template('5-number.html', n=n)
 
 
 if __name__ == "__main__":
